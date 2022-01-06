@@ -1,17 +1,13 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import firebase from 'firebase';
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY ,
     authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN ,
     projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID ,
-    storageBucket: process.env.REACT_APP_FIREBASE_DB_URL ,
-    messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID 
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET ,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID,
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+
+export default firebaseApp;
