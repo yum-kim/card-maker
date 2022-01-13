@@ -2,12 +2,22 @@ import React from 'react';
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import styles from './login.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const Login = ({ authService }) => {
-  const onLogin = (event) => {
-    console.log(authService);
+  const navigate = useNavigate();
+  const goToMaker = (userId) => {
+    console.log(userId);
+    navigate({
+      pathname: '/maker',
+      state: { id: userId },
+    });
+  };
 
-    authService.login(event.currentTarget.textContent).then(console.log);
+  const onLogin = (event) => {
+    authService //
+      .login(event.currentTarget.textContent)
+      .then((data) => goToMaker(data.user.uid));
   };
 
   return (
