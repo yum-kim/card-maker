@@ -1,0 +1,9 @@
+@value makerGreen from '../../common/colors.css';
+
+.maker {
+  flex-basis: 50%;
+}
+
+.title {
+  color: makerGreen;
+}

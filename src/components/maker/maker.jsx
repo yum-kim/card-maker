@@ -3,6 +3,8 @@ import styles from './maker.module.css';
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import { useNavigate } from 'react-router-dom';
+import CardMaker from '../cardMaker/cardMaker';
+import CardPreview from '../cardPreview/cardPreview';
 
 const Maker = ({ authService }) => {
   const navigate = useNavigate();
@@ -20,8 +22,12 @@ const Maker = ({ authService }) => {
 
   return (
     <section className={styles.maker}>
-      <Header onLogout={onLogout} />
-      <Footer />
+      <Header onLogout={onLogout} className={styles.header} />
+      <div className={styles.markerContent}>
+        <CardMaker></CardMaker>
+        <CardPreview></CardPreview>
+      </div>
+      <Footer className={styles.footer} />
     </section>
   );
 };

@@ -1,2 +1,21 @@
-.main {
+@value mediaQuery from '../../common/size.css';
+
+.maker {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.markerContent {
+  flex: 1 0 50%;
+  display: flex;
+  background-color: #fff;
+}
+
+@media screen and (max-width: mediaQuery) {
+  .markerContent {
+    flex-direction: column;
+  }
 }
