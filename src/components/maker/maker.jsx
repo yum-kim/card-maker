@@ -7,50 +7,52 @@ import Editor from '../editor/editor';
 import Preview from '../preview/preview';
 
 const Maker = ({ authService }) => {
-  const [cards, setCards] = useState([]);
+  const [cards, setCards] = useState([
+    {
+      id: '1',
+      name: 'yumi',
+      company: 'tnh',
+      theme: 'dark',
+      title: 'developer',
+      email: 'dwkimym93@gmail.com',
+      message: 'hello',
+      fileName: 'yumifile',
+      fileURL: null,
+    },
+    {
+      id: '2',
+      name: 'yumi2',
+      company: 'tnh',
+      theme: 'colorful',
+      title: 'developer',
+      email: 'dwkimym93@gmail.com',
+      message: 'hello',
+      fileName: 'yumifile',
+      fileURL: null,
+    },
+    {
+      id: '3',
+      name: 'yumi3',
+      company: 'tnh',
+      theme: 'light',
+      title: 'developer',
+      email: 'dwkimym93@gmail.com',
+      message: 'hello',
+      fileName: 'yumifile',
+      fileURL: 'yumi.png',
+    },
+  ]);
+
   const navigate = useNavigate();
   const onLogout = () => {
     authService.logout();
   };
 
-  useEffect(() => {
-    const card = [
-      {
-        id: '1',
-        name: 'yumi',
-        company: 'tnh',
-        theme: 'dark',
-        title: 'developer',
-        email: 'dwkimym93@gmail.com',
-        message: 'hello',
-        fileName: 'yumifile',
-        fileURL: null,
-      },
-      {
-        id: '2',
-        name: 'yumi2',
-        company: 'tnh',
-        theme: 'colorful',
-        title: 'developer',
-        email: 'dwkimym93@gmail.com',
-        message: 'hello',
-        fileName: 'yumifile',
-        fileURL: null,
-      },
-      {
-        id: '3',
-        name: 'yumi3',
-        company: 'tnh',
-        theme: 'light',
-        title: 'developer',
-        email: 'dwkimym93@gmail.com',
-        message: 'hello',
-        fileName: 'yumifile',
-        fileURL: 'yumi.png',
-      },
-    ];
-    setCards(card);
-  }, []);
+  const addCard = (card) => {
+    console.log(card);
+    const updated = [...cards, card];
+    setCards(updated);
+  };
 
   useEffect(() => {
     authService.onAuthChange((user) => {
@@ -64,7 +66,7 @@ const Maker = ({ authService }) => {
     <section className={styles.maker}>
       <Header onLogout={onLogout} className={styles.header} />
       <div className={styles.markerContent}>
-        <Editor cards={cards}></Editor>
+        <Editor cards={cards} addCard={addCard}></Editor>
         <Preview cards={cards}></Preview>
       </div>
       <Footer className={styles.footer} />

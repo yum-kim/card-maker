@@ -4,16 +4,7 @@ import Button from '../button/button';
 import ImageFileInput from '../image_file_input/image_file_input';
 
 const CardEditForm = ({ card }) => {
-  const {
-    name,
-    company,
-    theme,
-    title,
-    email,
-    message,
-    fileName,
-    fileURL,
-  } = card;
+  const { name, company, theme, title, email, message } = card;
 
   const onSubmit = () => {};
 
