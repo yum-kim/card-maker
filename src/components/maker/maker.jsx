@@ -3,8 +3,8 @@ import styles from './maker.module.css';
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import { useNavigate } from 'react-router-dom';
-import CardMaker from '../cardMaker/cardMaker';
-import CardPreview from '../cardPreview/cardPreview';
+import Editor from '../editor/editor';
+import Preview from '../preview/preview';
 
 const Maker = ({ authService }) => {
   const [cards, setCards] = useState([]);
@@ -64,8 +64,8 @@ const Maker = ({ authService }) => {
     <section className={styles.maker}>
       <Header onLogout={onLogout} className={styles.header} />
       <div className={styles.markerContent}>
-        <CardMaker cards={cards}></CardMaker>
-        <CardPreview cards={cards}></CardPreview>
+        <Editor cards={cards}></Editor>
+        <Preview cards={cards}></Preview>
       </div>
       <Footer className={styles.footer} />
     </section>
