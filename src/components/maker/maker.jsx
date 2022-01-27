@@ -7,8 +7,8 @@ import Editor from '../editor/editor';
 import Preview from '../preview/preview';
 
 const Maker = ({ authService }) => {
-  const [cards, setCards] = useState([
-    {
+  const [cards, setCards] = useState({
+    1: {
       id: '1',
       name: 'yumi',
       company: 'tnh',
@@ -19,7 +19,7 @@ const Maker = ({ authService }) => {
       fileName: 'yumifile',
       fileURL: null,
     },
-    {
+    2: {
       id: '2',
       name: 'yumi2',
       company: 'tnh',
@@ -30,7 +30,7 @@ const Maker = ({ authService }) => {
       fileName: 'yumifile',
       fileURL: null,
     },
-    {
+    3: {
       id: '3',
       name: 'yumi3',
       company: 'tnh',
@@ -41,17 +41,31 @@ const Maker = ({ authService }) => {
       fileName: 'yumifile',
       fileURL: 'yumi.png',
     },
-  ]);
+  });
 
   const navigate = useNavigate();
   const onLogout = () => {
     authService.logout();
   };
 
-  const addCard = (card) => {
-    console.log(card);
-    const updated = [...cards, card];
-    setCards(updated);
+  const createOrUpdateCard = (card) => {
+    // const updated = { ...cards };
+    // updated[card.id] = card;
+    // setCards(updated);
+
+    setCards((cards) => {
+      const updated = { ...cards };
+      updated[card.id] = card;
+      return updated;
+    });
+  };
+
+  const deleteCard = (card) => {
+    setCards((cards) => {
+      const updated = { ...cards };
+      delete updated[card.id];
+      return updated;
+    });
   };
 
   useEffect(() => {
@@ -66,7 +80,12 @@ const Maker = ({ authService }) => {
     <section className={styles.maker}>
       <Header onLogout={onLogout} className={styles.header} />
       <div className={styles.markerContent}>
-        <Editor cards={cards} addCard={addCard}></Editor>
+        <Editor
+          cards={cards}
+          addCard={createOrUpdateCard}
+          updateCard={createOrUpdateCard}
+          deleteCard={deleteCard}
+        ></Editor>
         <Preview cards={cards}></Preview>
       </div>
       <Footer className={styles.footer} />
