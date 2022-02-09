@@ -9,7 +9,7 @@ const Card = ({ card }) => {
     title,
     email,
     message,
-    filaName,
+    // filaName,
     fileURL,
   } = card;
   const DEFAULT_URL = 'images/default_logo.png';

@@ -5,8 +5,9 @@ import Footer from '../footer/footer';
 import { useNavigate } from 'react-router-dom';
 import Editor from '../editor/editor';
 import Preview from '../preview/preview';
+import ImageUploder from '../../service/image_uploader';
 
-const Maker = ({ authService }) => {
+const Maker = ({ FileInput, authService }) => {
   const [cards, setCards] = useState({
     1: {
       id: '1',
@@ -81,6 +82,7 @@ const Maker = ({ authService }) => {
       <Header onLogout={onLogout} className={styles.header} />
       <div className={styles.markerContent}>
         <Editor
+          FileInput={FileInput}
           cards={cards}
           addCard={createOrUpdateCard}
           updateCard={createOrUpdateCard}
