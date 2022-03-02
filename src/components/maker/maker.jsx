@@ -17,8 +17,8 @@ const Maker = ({ FileInput, authService }) => {
       title: 'developer',
       email: 'dwkimym93@gmail.com',
       message: 'hello',
-      fileName: 'yumifile',
-      fileURL: null,
+      fileName: '',
+      fileURL: '',
     },
     2: {
       id: '2',
@@ -28,8 +28,8 @@ const Maker = ({ FileInput, authService }) => {
       title: 'developer',
       email: 'dwkimym93@gmail.com',
       message: 'hello',
-      fileName: 'yumifile',
-      fileURL: null,
+      fileName: '',
+      fileURL: '',
     },
     3: {
       id: '3',
@@ -39,8 +39,8 @@ const Maker = ({ FileInput, authService }) => {
       title: 'developer',
       email: 'dwkimym93@gmail.com',
       message: 'hello',
-      fileName: 'yumifile',
-      fileURL: 'yumi.png',
+      fileName: '',
+      fileURL: '',
     },
   });
 
