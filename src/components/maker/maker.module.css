@@ -12,10 +12,12 @@
   flex: 1 0 50%;
   display: flex;
   background-color: #fff;
+  overflow: hidden;
 }
 
 @media screen and (max-width: mediaQuery) {
   .markerContent {
     flex-direction: column;
+    overflow: initial;
   }
 }
