@@ -2,63 +2,29 @@ import React, { useEffect, useState } from 'react';
 import styles from './maker.module.css';
 import Header from '../header/header';
 import Footer from '../footer/footer';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Editor from '../editor/editor';
 import Preview from '../preview/preview';
-import ImageUploder from '../../service/image_uploader';
 
-const Maker = ({ FileInput, authService }) => {
-  const [cards, setCards] = useState({
-    1: {
-      id: '1',
-      name: 'yumi',
-      company: 'tnh',
-      theme: 'dark',
-      title: 'developer',
-      email: 'dwkimym93@gmail.com',
-      message: 'hello',
-      fileName: '',
-      fileURL: '',
-    },
-    2: {
-      id: '2',
-      name: 'yumi2',
-      company: 'tnh',
-      theme: 'colorful',
-      title: 'developer',
-      email: 'dwkimym93@gmail.com',
-      message: 'hello',
-      fileName: '',
-      fileURL: '',
-    },
-    3: {
-      id: '3',
-      name: 'yumi3',
-      company: 'tnh',
-      theme: 'light',
-      title: 'developer',
-      email: 'dwkimym93@gmail.com',
-      message: 'hello',
-      fileName: '',
-      fileURL: '',
-    },
-  });
-
+const Maker = ({ FileInput, authService, cardRepository }) => {
+  const location = useLocation().state;
   const navigate = useNavigate();
+
+  const [cards, setCards] = useState({});
+  const [userId, setUserId] = useState(location);
+
   const onLogout = () => {
     authService.logout();
   };
 
   const createOrUpdateCard = (card) => {
-    // const updated = { ...cards };
-    // updated[card.id] = card;
-    // setCards(updated);
-
     setCards((cards) => {
       const updated = { ...cards };
       updated[card.id] = card;
       return updated;
     });
+
+    cardRepository.saveCard(userId, card);
   };
 
   const deleteCard = (card) => {
@@ -71,7 +37,9 @@ const Maker = ({ FileInput, authService }) => {
 
   useEffect(() => {
     authService.onAuthChange((user) => {
-      if (!user) {
+      if (user) {
+        setUserId(user.uid);
+      } else {
         navigate('/');
       }
     });
