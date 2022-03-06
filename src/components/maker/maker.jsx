@@ -7,11 +7,11 @@ import Editor from '../editor/editor';
 import Preview from '../preview/preview';
 
 const Maker = ({ FileInput, authService, cardRepository }) => {
-  const location = useLocation().state;
+  const historyState = useLocation().state;
   const navigate = useNavigate();
 
   const [cards, setCards] = useState({});
-  const [userId, setUserId] = useState(location);
+  const [userId, setUserId] = useState(historyState && historyState.id);
 
   const onLogout = () => {
     authService.logout();
@@ -33,8 +33,28 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
       delete updated[card.id];
       return updated;
     });
+
+    cardRepository.removeCard(userId, card);
   };
 
+  /** useEffect는 로직별로 여러개를 만들어쓸 수 있는 장점 */
+  //1) userId 변경될 때 마다
+  useEffect(() => {
+    if (!userId) return;
+
+    const stopSync = cardRepository.syncCards(userId, (cards) => {
+      setCards(cards);
+    });
+
+    /*
+     * useEffect에서 어떤 함수를 리턴하게 되면,
+     * unmount 되었을 때 리액트가 자동으로 리턴한 함수를 호출해 줌
+     * => 이 함수에서는 리소스를 정리하는 로직을 넣어줄 수 있음
+     */
+    return () => stopSync();
+  }, [userId]);
+
+  //2) 로그인될 때 마다
   useEffect(() => {
     authService.onAuthChange((user) => {
       if (user) {
