@@ -52,7 +52,7 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
      * => 이 함수에서는 리소스를 정리하는 로직을 넣어줄 수 있음
      */
     return () => stopSync();
-  }, [userId]);
+  }, [userId, cardRepository]);
 
   //2) 로그인될 때 마다
   useEffect(() => {
@@ -63,7 +63,7 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
         navigate('/');
       }
     });
-  });
+  }, [authService, userId, navigate]);
 
   return (
     <section className={styles.maker}>
