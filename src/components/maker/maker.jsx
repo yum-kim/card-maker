@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import styles from './maker.module.css';
 import Header from '../header/header';
 import Footer from '../footer/footer';
@@ -13,9 +13,9 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
   const [cards, setCards] = useState({});
   const [userId, setUserId] = useState(historyState && historyState.id);
 
-  const onLogout = () => {
+  const onLogout = useCallback(() => {
     authService.logout();
-  };
+  }, [authService]);
 
   const createOrUpdateCard = (card) => {
     setCards((cards) => {
